@@ -1,0 +1,134 @@
+{
+  "market_regimes": {
+    "strong_bull": {
+      "criteria": {
+        "trend_strength": "> 0.7",
+        "volatility": "< 0.3",
+        "momentum": "> 0.6"
+      },
+      "strategies": [
+        "directional_long",
+        "momentum_breakout"
+      ]
+    },
+    "weak_bull": {
+      "criteria": {
+        "trend_strength": "0.3 to 0.7",
+        "volatility": "< 0.5",
+        "momentum": "0.2 to 0.6"
+      },
+      "strategies": [
+        "long_bias",
+        "mean_reversion_long"
+      ]
+    },
+    "sideways": {
+      "criteria": {
+        "trend_strength": "< 0.3",
+        "volatility": "< 0.4",
+        "momentum": "-0.2 to 0.2"
+      },
+      "strategies": [
+        "range_trading",
+        "straddle",
+        "wait"
+      ]
+    },
+    "weak_bear": {
+      "criteria": {
+        "trend_strength": "-0.7 to -0.3",
+        "volatility": "< 0.6",
+        "momentum": "-0.6 to -0.2"
+      },
+      "strategies": [
+        "short_bias",
+        "mean_reversion_short"
+      ]
+    },
+    "strong_bear": {
+      "criteria": {
+        "trend_strength": "< -0.7",
+        "volatility": "> 0.3",
+        "momentum": "< -0.6"
+      },
+      "strategies": [
+        "directional_short",
+        "bear_hedge"
+      ]
+    },
+    "high_volatility": {
+      "criteria": {
+        "volatility": "> 0.6",
+        "trend_strength": "any",
+        "momentum": "any"
+      },
+      "strategies": [
+        "volatility_breakout",
+        "straddle",
+        "wait"
+      ]
+    }
+  },
+  "risk_management": {
+    "max_risk_per_trade": 0.02,
+    "max_portfolio_risk": 0.15,
+    "stop_loss_range": [0.03, 0.1],
+    "take_profit_multiplier": [2.0, 3.5],
+    "position_size_method": "fixed_risk"
+  },
+  "strategy_templates": {
+    "directional_long": {
+      "description": "Pure long position with defined risk management",
+      "entry_conditions": ["bullish_signals", "momentum_confirmation"],
+      "risk_reward_ratio": 2.5,
+      "stop_loss_pct": 0.05,
+      "take_profit_levels": [0.1, 0.18]
+    },
+    "directional_short": {
+      "description": "Pure short position with defined risk management",
+      "entry_conditions": ["bearish_signals", "momentum_confirmation"],
+      "risk_reward_ratio": 2.0,
+      "stop_loss_pct": 0.06,
+      "take_profit_levels": [0.08, 0.15]
+    },
+    "long_short_hedge": {
+      "description": "Long primary + short hedge to reduce market risk",
+      "entry_conditions": ["mixed_signals", "high_correlation"],
+      "hedge_ratio": 0.3,
+      "stop_loss_pct": 0.04,
+      "take_profit_levels": [0.08, 0.12]
+    },
+    "straddle": {
+      "description": "Profit from high volatility in either direction",
+      "entry_conditions": ["high_volatility_expected", "uncertain_direction"],
+      "premium_cost": "factor_in",
+      "profit_threshold": 0.15
+    },
+    "range_trading": {
+      "description": "Trade within defined support and resistance levels",
+      "entry_conditions": ["clear_support_resistance", "low_volatility"],
+      "risk_reward_ratio": 1.5,
+      "stop_loss_pct": 0.03,
+      "take_profit_levels": [0.04, 0.06]
+    }
+  },
+  "display_settings": {
+    "console_colors": {
+      "bullish": "green",
+      "bearish": "red",
+      "neutral": "yellow",
+      "info": "cyan"
+    },
+    "precision": {
+      "price": 2,
+      "percentage": 1,
+      "position_size": 6
+    }
+  },
+  "export_settings": {
+    "markdown_template": "detailed",
+    "include_charts": false,
+    "file_naming": "{ticker}_{timestamp}",
+    "output_directory": "hedge_results"
+  }
+}

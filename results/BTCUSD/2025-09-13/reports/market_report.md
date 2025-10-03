@@ -1,0 +1,3 @@
+It seems there is no available data for BTCUSD for the specified date range (August 14, 2025, to September 13, 2025). This might be due to limitations in the data source or incorrect entry parameters.
+
+You may want to adjust the date range, or check the symbol's validity for the data provider. Alternatively, let me know if there's another specific analyst request or if adjusting the dates/shares could make it possible.
